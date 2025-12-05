@@ -30,40 +30,16 @@ export default async function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section style={{
-        padding: 'var(--spacing-2xl) 0',
-        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%)'
-      }}>
+      <section className="hero-section">
         <div className="container">
-          <div style={{
-            textAlign: 'center',
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}>
-            <h1 className="fade-in" style={{
-              fontSize: 'var(--font-size-4xl)',
-              fontWeight: '900',
-              marginBottom: 'var(--spacing-md)',
-              background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              lineHeight: 1.2
-            }}>
+          <div className="hero-content">
+            <h1 className="fade-in hero-title">
               Welcome to ShopHub
             </h1>
-            <p className="fade-in" style={{
-              fontSize: 'var(--font-size-xl)',
-              color: 'var(--text-secondary)',
-              marginBottom: 'var(--spacing-xl)',
-              lineHeight: 1.6
-            }}>
+            <p className="fade-in hero-description">
               Discover amazing products at unbeatable prices. Your one-stop shop for everything you need.
             </p>
-            <Link href="/products" className="btn btn-primary" style={{
-              fontSize: 'var(--font-size-lg)',
-              padding: 'var(--spacing-md) var(--spacing-xl)'
-            }}>
+            <Link href="/products" className="btn btn-primary hero-cta">
               Shop Now
               <svg
                 width="20"
@@ -84,14 +60,9 @@ export default async function Home() {
       </section>
 
       {/* Featured Products */}
-      <section style={{ padding: 'var(--spacing-2xl) 0' }}>
+      <section className="section-padding">
         <div className="container">
-          <h2 style={{
-            fontSize: 'var(--font-size-3xl)',
-            fontWeight: '800',
-            marginBottom: 'var(--spacing-xl)',
-            textAlign: 'center'
-          }}>
+          <h2 className="section-title">
             Featured Products
           </h2>
           
@@ -102,14 +73,14 @@ export default async function Home() {
               ))}
             </div>
           ) : (
-            <div className="glass card" style={{ textAlign: 'center', padding: 'var(--spacing-2xl)' }}>
-              <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)' }}>
+            <div className="glass card empty-state">
+              <p className="empty-state-text">
                 No featured products available. Please check back later!
               </p>
             </div>
           )}
 
-          <div style={{ textAlign: 'center', marginTop: 'var(--spacing-xl)' }}>
+          <div className="text-center mt-xl">
             <Link href="/products" className="btn btn-outline">
               View All Products
             </Link>
@@ -118,47 +89,26 @@ export default async function Home() {
       </section>
 
       {/* Features */}
-      <section style={{
-        padding: 'var(--spacing-2xl) 0',
-        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%)'
-      }}>
+      <section className="features-section">
         <div className="container">
           <div className="grid grid-3">
-            <div className="glass card" style={{ textAlign: 'center' }}>
-              <div style={{
-                width: '60px',
-                height: '60px',
-                margin: '0 auto var(--spacing-md)',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
+            <div className="glass card feature-card">
+              <div className="feature-icon feature-icon-primary">
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
               </div>
-              <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: '700', marginBottom: 'var(--spacing-sm)' }}>
+              <h3 className="feature-title">
                 Premium Quality
               </h3>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-secondary">
                 All products are carefully selected for quality and durability
               </p>
             </div>
 
-            <div className="glass card" style={{ textAlign: 'center' }}>
-              <div style={{
-                width: '60px',
-                height: '60px',
-                margin: '0 auto var(--spacing-md)',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
+            <div className="glass card feature-card">
+              <div className="feature-icon feature-icon-secondary">
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                   <rect x="1" y="3" width="15" height="13"></rect>
                   <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
@@ -166,34 +116,25 @@ export default async function Home() {
                   <circle cx="18.5" cy="18.5" r="2.5"></circle>
                 </svg>
               </div>
-              <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: '700', marginBottom: 'var(--spacing-sm)' }}>
+              <h3 className="feature-title">
                 Fast Shipping
               </h3>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-secondary">
                 Quick and reliable delivery to your doorstep
               </p>
             </div>
 
-            <div className="glass card" style={{ textAlign: 'center' }}>
-              <div style={{
-                width: '60px',
-                height: '60px',
-                margin: '0 auto var(--spacing-md)',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--accent) 0%, #059669 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
+            <div className="glass card feature-card">
+              <div className="feature-icon feature-icon-accent">
                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                   <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
               </div>
-              <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: '700', marginBottom: 'var(--spacing-sm)' }}>
+              <h3 className="feature-title">
                 Secure Payment
               </h3>
-              <p style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-secondary">
                 Your transactions are safe and encrypted
               </p>
             </div>

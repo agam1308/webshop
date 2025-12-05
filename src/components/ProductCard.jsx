@@ -16,20 +16,14 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="card glass fade-in" style={{
-      overflow: 'hidden',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      transition: 'transform 0.3s ease'
-    }}>
+    <div className="card glass fade-in product-card">
       {/* Product Image */}
       <Link href={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
-        <div style={{ height: '220px', overflow: 'hidden', position: 'relative', background: '#f0f0f0' }}>
+        <div className="product-card-image-container">
           <img 
             src={product.image?.startsWith('/') ? `/webshop${product.image}` : product.image} 
             alt={product.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            className="product-card-image"
             onError={(e) => {
               e.target.onerror = null; 
               e.target.src = 'https://placehold.co/600x400?text=No+Image';
@@ -39,87 +33,33 @@ export default function ProductCard({ product }) {
       </Link>
 
       {/* Product Info */}
-      <div style={{ 
-        padding: '1rem', 
-        flex: 1, 
-        display: 'flex', 
-        flexDirection: 'column',
-        gap: '0.5rem'
-      }}>
+      <div className="product-card-content">
         <Link href={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <h3 style={{
-            fontSize: '1.25rem',
-            fontWeight: '700',
-            marginBottom: '0.5rem',
-            color: 'var(--text)',
-            lineHeight: '1.4'
-          }}>
+          <h3 className="product-card-title">
             {product.name}
           </h3>
         </Link>
 
         {product.category_name && (
-          <p style={{
-            fontSize: '0.875rem',
-            color: 'var(--text-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-            fontWeight: '500'
-          }}>
+          <p className="product-card-category">
             {product.category_name}
           </p>
         )}
 
-        <p style={{
-          fontSize: '0.95rem',
-          color: 'var(--text-secondary)',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-          flex: 1,
-          lineHeight: '1.6'
-        }}>
+        <p className="product-card-description">
           {product.description}
         </p>
 
         {/* Price and Button */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '0.5rem',
-          marginTop: 'auto',
-          paddingTop: '0.5rem',
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)'
-        }}>
-          <span style={{
-            fontSize: '1.5rem',
-            fontWeight: '800',
-            background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            flex: '1 1 auto',
-            minWidth: 0
-          }}>
+        <div className="product-card-footer">
+          <span className="product-card-price">
             ${product.price}
           </span>
 
           <button
             onClick={handleAddToCart}
-            className="btn btn-primary"
+            className="btn btn-primary product-card-btn"
             disabled={adding}
-            style={{ 
-              whiteSpace: 'nowrap', 
-              padding: '0.5rem 0.875rem',
-              fontSize: '0.875rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              flex: '0 0 auto'
-            }}
           >
             {adding ? (
               <span className="loading"></span>

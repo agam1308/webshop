@@ -103,10 +103,10 @@ export default function ProductDetailClient() {
 
   if (loading) {
     return (
-      <div style={{ padding: 'var(--spacing-2xl) 0', minHeight: '80vh' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <div className="loading" style={{ width: '40px', height: '40px', margin: '0 auto' }}></div>
-          <p style={{ marginTop: 'var(--spacing-md)', color: 'var(--text-secondary)' }}>
+      <div className="page-container">
+        <div className="container loading-container">
+          <div className="loading loading-spinner"></div>
+          <p className="loading-text">
             Loading product...
           </p>
         </div>
@@ -119,28 +119,23 @@ export default function ProductDetailClient() {
   }
 
   return (
-    <div style={{ padding: 'var(--spacing-2xl) 0', minHeight: '80vh' }}>
+    <div className="page-container">
       <div className="container">
         {/* Breadcrumb */}
-        <div style={{ marginBottom: 'var(--spacing-xl)', display: 'flex', gap: 'var(--spacing-xs)', alignItems: 'center' }}>
-          <Link href="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Home</Link>
-          <span style={{ color: 'var(--text-secondary)' }}>/</span>
-          <Link href="/products" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Products</Link>
-          <span style={{ color: 'var(--text-secondary)' }}>/</span>
-          <span style={{ color: 'var(--text)' }}>{product.name}</span>
+        <div className="breadcrumb">
+          <Link href="/" className="breadcrumb-link">Home</Link>
+          <span className="breadcrumb-separator">/</span>
+          <Link href="/products" className="breadcrumb-link">Products</Link>
+          <span className="breadcrumb-separator">/</span>
+          <span className="breadcrumb-current">{product.name}</span>
         </div>
 
         {/* Product Detail */}
-        <div className="glass card" style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 'var(--spacing-2xl)',
-          padding: 'var(--spacing-2xl)'
-        }}>
+        <div className="glass card product-detail-grid">
           {/* Product Image */}
           <div>
             <div 
-              style={{ height: '400px', cursor: 'pointer', overflow: 'hidden', borderRadius: 'var(--radius-lg)', background: '#f0f0f0' }}
+              className="product-detail-image-container"
               onClick={() => setIsImageModalOpen(true)}
             >
               <img 
@@ -153,7 +148,7 @@ export default function ProductDetailClient() {
                 }}
               />
             </div>
-            <p style={{ textAlign: 'center', marginTop: 'var(--spacing-sm)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
+            <p className="product-detail-image-hint">
               Click image to enlarge
             </p>
           </div>
@@ -161,63 +156,36 @@ export default function ProductDetailClient() {
           {/* Product Info */}
           <div>
             {product.category_name && (
-              <span style={{
-                display: 'inline-block',
-                padding: 'var(--spacing-xs) var(--spacing-md)',
-                background: 'rgba(99, 102, 241, 0.2)',
-                color: 'var(--primary-light)',
-                borderRadius: 'var(--radius-lg)',
-                fontSize: 'var(--font-size-sm)',
-                fontWeight: '600',
-                marginBottom: 'var(--spacing-md)'
-              }}>
+              <span className="product-detail-category-badge">
                 {product.category_name}
               </span>
             )}
 
-            <h1 style={{
-              fontSize: 'var(--font-size-3xl)',
-              fontWeight: '900',
-              marginBottom: 'var(--spacing-md)',
-              color: 'var(--text)'
-            }}>
+            <h1 className="product-detail-title">
               {product.name}
             </h1>
 
-            <p style={{
-              fontSize: 'var(--font-size-3xl)',
-              fontWeight: '800',
-              marginBottom: 'var(--spacing-lg)',
-              background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>
+            <p className="product-detail-price">
               ${product.price}
             </p>
 
-            <p style={{
-              fontSize: 'var(--font-size-lg)',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.8,
-              marginBottom: 'var(--spacing-xl)'
-            }}>
+            <p className="product-detail-description">
               {product.description}
             </p>
 
             {/* Stock Info */}
-            <div style={{ marginBottom: 'var(--spacing-xl)' }}>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-sm)' }}>
+            <div className="mb-xl">
+              <p className="text-secondary mb-sm">
                 <strong>Stock:</strong> {product.stock > 0 ? `${product.stock} available` : 'Out of stock'}
               </p>
             </div>
 
             {/* Quantity Selector */}
-            <div style={{ marginBottom: 'var(--spacing-xl)' }}>
+            <div className="mb-xl">
               <label style={{ display: 'block', marginBottom: 'var(--spacing-sm)', fontWeight: '600' }}>
                 Quantity
               </label>
-              <div style={{ display: 'flex', gap: 'var(--spacing-sm)', alignItems: 'center' }}>
+              <div className="quantity-selector">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="btn btn-outline"
@@ -231,11 +199,7 @@ export default function ProductDetailClient() {
                   onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                   min="1"
                   max={product.stock}
-                  style={{
-                    width: '80px',
-                    textAlign: 'center',
-                    padding: 'var(--spacing-sm)'
-                  }}
+                  className="quantity-input"
                 />
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
@@ -255,15 +219,8 @@ export default function ProductDetailClient() {
                   console.log('Button clicked directly');
                   handleAddToCart(e);
                 }}
-                className="btn btn-primary"
+                className="btn btn-primary add-to-cart-btn"
                 disabled={adding || product.stock === 0}
-                style={{
-                  flex: 1,
-                  fontSize: 'var(--font-size-lg)',
-                  padding: '12px 24px',
-                  position: 'relative',
-                  zIndex: 10
-                }}
               >
                 {adding ? (
                   <span className="loading"></span>
@@ -289,31 +246,14 @@ export default function ProductDetailClient() {
       {/* Image Modal */}
       {isImageModalOpen && (
         <div 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0, 0, 0, 0.8)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 1000,
-            cursor: 'pointer'
-          }}
+          className="modal-overlay"
           onClick={() => setIsImageModalOpen(false)}
         >
-          <div style={{ position: 'relative', maxWidth: '90%', maxHeight: '90%' }}>
+          <div className="modal-content">
             <img 
               src={product.image} 
               alt={product.name}
-              style={{ 
-                maxWidth: '90vw', 
-                maxHeight: '90vh',
-                objectFit: 'contain',
-                borderRadius: 'var(--radius-lg)'
-              }}
+              className="modal-image"
               onError={(e) => {
                 e.target.onerror = null; 
                 e.target.src = 'https://placehold.co/800x600?text=No+Image';
@@ -321,16 +261,7 @@ export default function ProductDetailClient() {
             />
             <button
               onClick={() => setIsImageModalOpen(false)}
-              style={{
-                position: 'absolute',
-                top: '-40px',
-                right: '-40px',
-                background: 'none',
-                border: 'none',
-                color: 'white',
-                fontSize: '30px',
-                cursor: 'pointer'
-              }}
+              className="modal-close"
             >
               ×
             </button>

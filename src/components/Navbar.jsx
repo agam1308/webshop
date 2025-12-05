@@ -16,87 +16,44 @@ export default function Navbar() {
   return (
     <nav className="glass-strong sticky top-0 z-50">
       <div className="container">
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '1rem 0',
-          gap: '2rem'
-        }}>
+        <div className="navbar-container">
           {/* Logo */}
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <h1 style={{
-              fontSize: 'var(--font-size-2xl)',
-              fontWeight: '800',
-              background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              margin: 0
-            }}>
+            <h1 className="navbar-logo">
               ShopHub
             </h1>
           </Link>
 
           {/* Navigation Links */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '2rem',
-            flex: 1,
-            justifyContent: 'center'
-          }}>
+          <div className="navbar-links">
             <Link
               href="/"
-              style={{
-                color: isActive('/') ? 'var(--primary-light)' : 'var(--text)',
-                textDecoration: 'none',
-                fontWeight: '600',
-                transition: 'color var(--transition-base)',
-                fontSize: 'var(--font-size-lg)'
-              }}
+              className={`nav-link ${isActive('/') ? 'active' : ''}`}
             >
               Home
             </Link>
             <Link
               href="/products"
-              style={{
-                color: isActive('/products') ? 'var(--primary-light)' : 'var(--text)',
-                textDecoration: 'none',
-                fontWeight: '600',
-                transition: 'color var(--transition-base)',
-                fontSize: 'var(--font-size-lg)'
-              }}
+              className={`nav-link ${isActive('/products') ? 'active' : ''}`}
             >
               Products
             </Link>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="navbar-actions">
             {/* User Menu */}
             {user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <span style={{ fontWeight: '600' }}>Hi, {user.name}</span>
+              <div className="user-menu">
+                <span className="user-name">Hi, {user.name}</span>
                 <button 
                   onClick={logout}
-                  className="btn"
-                  style={{ 
-                    padding: '0.5rem 1rem',
-                    fontSize: '0.9rem',
-                    background: 'rgba(255, 255, 255, 0.5)'
-                  }}
+                  className="btn btn-glass btn-small"
                 >
                   Logout
                 </button>
               </div>
             ) : (
-              <Link href="/login" className="btn" style={{ 
-                padding: '0.5rem 1rem',
-                fontSize: '0.9rem',
-                background: 'rgba(255, 255, 255, 0.5)',
-                textDecoration: 'none',
-                color: 'var(--text)'
-              }}>
+              <Link href="/login" className="btn btn-glass btn-small">
                 Login
               </Link>
             )}
@@ -119,7 +76,7 @@ export default function Navbar() {
               </svg>
               Cart
               {cartCount > 0 && (
-                <span className="badge" style={{ position: 'absolute', top: '-8px', right: '-8px' }}>
+                <span className="badge cart-badge">
                   {cartCount}
                 </span>
               )}
