@@ -27,7 +27,7 @@ export default function ProductCard({ product }) {
       <Link href={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
         <div style={{ height: '220px', overflow: 'hidden', position: 'relative', background: '#f0f0f0' }}>
           <img 
-            src={product.image} 
+            src={product.image?.startsWith('/') ? `/webshop${product.image}` : product.image} 
             alt={product.name}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             onError={(e) => {

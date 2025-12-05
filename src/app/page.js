@@ -13,7 +13,14 @@ async function getFeaturedProducts() {
     return featured.length > 0 ? featured : products.slice(0, 6);
   } catch (error) {
     console.error('Failed to fetch products:', error);
-    return [];
+    // Fallback data for static deployment
+    const fallbackProducts = [
+      { id: 1, name: 'Wireless Headphones', price: 149.99, image: '/images/headphones.jpg', description: 'Premium noise-cancelling wireless headphones', featured: 1, category_name: 'Electronics' },
+      { id: 2, name: 'Smart Watch', price: 299.99, image: '/images/smartwatch.jpg', description: 'Fitness tracking smartwatch with heart rate monitor', featured: 1, category_name: 'Electronics' },
+      { id: 4, name: 'Running Shoes', price: 89.99, image: '/images/running-shoes.jpg', description: 'Lightweight running shoes with cushioned sole', featured: 1, category_name: 'Sports' },
+      { id: 9, name: 'LED Desk Lamp', price: 39.99, image: '/images/desk-lamp.jpg', description: 'Adjustable LED desk lamp with USB charging port', featured: 1, category_name: 'Home & Garden' },
+    ];
+    return fallbackProducts;
   }
 }
 
