@@ -74,25 +74,13 @@ export default function ProductsPage() {
   };
 
   return (
-    <div style={{ padding: 'var(--spacing-2xl) 0', minHeight: '80vh' }}>
+    <div className="page-container">
       <div className="container">
-        <h1 className="fade-in" style={{
-          fontSize: 'var(--font-size-4xl)',
-          fontWeight: '900',
-          marginBottom: 'var(--spacing-md)',
-          background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
-        }}>
+        <h1 className="fade-in page-header-title">
           All Products
         </h1>
         
-        <p style={{
-          fontSize: 'var(--font-size-lg)',
-          color: 'var(--text-secondary)',
-          marginBottom: 'var(--spacing-xl)'
-        }}>
+        <p className="page-header-subtitle">
           Browse our complete collection of premium products
         </p>
 
@@ -105,9 +93,9 @@ export default function ProductsPage() {
 
         {/* Products Grid */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: 'var(--spacing-2xl)' }}>
-            <div className="loading" style={{ width: '40px', height: '40px', margin: '0 auto' }}></div>
-            <p style={{ marginTop: 'var(--spacing-md)', color: 'var(--text-secondary)' }}>
+          <div className="loading-container">
+            <div className="loading loading-spinner"></div>
+            <p className="loading-text">
               Loading products...
             </p>
           </div>
@@ -118,8 +106,8 @@ export default function ProductsPage() {
             ))}
           </div>
         ) : (
-          <div className="glass card" style={{ textAlign: 'center', padding: 'var(--spacing-2xl)' }}>
-            <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)' }}>
+          <div className="glass card empty-state">
+            <p className="empty-state-text">
               No products found in this category.
             </p>
           </div>
