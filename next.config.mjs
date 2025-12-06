@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
-  output: 'export',
-  basePath: '/webshop',
+  output: isProd ? 'export' : undefined,
+  basePath: isProd ? '/webshop' : '',
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -13,6 +15,9 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? '/webshop' : '',
   },
 };
 

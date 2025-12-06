@@ -21,7 +21,7 @@ export default function ProductCard({ product }) {
       <Link href={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
         <div className="product-card-image-container">
           <img 
-            src={product.image?.startsWith('/') ? `/webshop${product.image}` : product.image} 
+            src={product.image?.startsWith('/') ? `${process.env.NEXT_PUBLIC_BASE_PATH || ''}${product.image}` : product.image} 
             alt={product.name}
             className="product-card-image"
             onError={(e) => {

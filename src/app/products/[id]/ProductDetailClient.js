@@ -139,7 +139,7 @@ export default function ProductDetailClient() {
               onClick={() => setIsImageModalOpen(true)}
             >
               <img 
-                src={product.image?.startsWith('/') ? `/webshop${product.image}` : product.image} 
+                src={product.image?.startsWith('/') ? `${process.env.NEXT_PUBLIC_BASE_PATH || ''}${product.image}` : product.image} 
                 alt={product.name}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
